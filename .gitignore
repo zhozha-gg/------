@@ -1,0 +1,14 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Настройки VS Code
+.vscode/
+
+# Мусор от macOS
+__MACOSX/
+.DS_Store
+
+# Кэш Python
+__pycache__/
+*.pyc
