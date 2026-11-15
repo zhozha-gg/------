@@ -1,0 +1,9 @@
+﻿component,weight,top5
+6,0.6092635,"read=0.34, setsockopt=0.22, fcntl=0.22, write=0.11, futex=0.04"
+0,0.16933484,"read=0.29, setsockopt=0.19, fcntl=0.19, futex=0.11, write=0.10"
+3,0.068744786,"read=0.28, setsockopt=0.18, fcntl=0.18, futex=0.12, write=0.09"
+5,0.048197124,"read=0.29, setsockopt=0.20, fcntl=0.19, write=0.09, futex=0.06"
+2,0.044470776,"read=0.25, setsockopt=0.18, fcntl=0.18, write=0.08, futex=0.04"
+1,0.033567805,"read=0.33, setsockopt=0.22, fcntl=0.22, write=0.11, futex=0.05"
+7,0.024793318,"read=0.27, setsockopt=0.19, fcntl=0.18, write=0.08, futex=0.05"
+4,0.0016278366,"read=0.23, setsockopt=0.16, fcntl=0.16, write=0.06, poll=0.04"
