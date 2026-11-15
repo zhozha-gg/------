@@ -1,0 +1,40 @@
+flowchart TB
+    A["Данные LID-DS<br/>архив записи: .sc (системные вызовы) + .json (метаданные)"]
+    subgraph P["Предобработка (features_windows.py)"]
+        B["Чтение записи<br/>только события входа в вызов"]
+        C["Словарь системных вызовов<br/>только по training"]
+        D["Скользящие окна W, шаг S = W/2<br/>признаки: доли вызовов в окне"]
+        E["Разметка окон по времени<br/>начала эксплойта"]
+        B --> C --> D --> E
+    end
+    subgraph S["Разбиение"]
+        F["training: только норма<br/>обучение моделей"]
+        G["validation: только норма<br/>пороги"]
+        H["test: норма и атаки<br/>dev: выбор настроек<br/>final: один итоговый прогон"]
+    end
+    I["Масштабирование StandardScaler<br/>обучается на training"]
+    subgraph M["Модели (run_experiment.py, gmm_study.py)"]
+        J["GMM, основной метод<br/>k и ковариация по BIC<br/>оценка: -log p(x)"]
+        K["Для сравнения:<br/>Isolation Forest, One-Class SVM, LOF"]
+        L["Baseline (baselines.py):<br/>STIDE, правило по длительности"]
+    end
+    N["Оценка аномальности окна"]
+    O["Порог окна: 99-й перцентиль<br/>оценок validation"]
+    Q["Агрегация по записи<br/>max, p95, доля окон выше порога<br/>порог записи: 95-й перцентиль validation"]
+    R["Метрики: Precision, Recall, F1, FPR,<br/>ROC-AUC, PR-AUC, матрица ошибок"]
+    T["train_final.py: сохранение модели .joblib"]
+    U["detect.py, plot_record.py:<br/>разбор новой записи, вердикт, график"]
+    A --> B
+    E --> F
+    E --> G
+    E --> H
+    F --> I --> J
+    I --> K
+    F --> L
+    J --> N
+    K --> N
+    L --> N
+    G --> O
+    N --> O --> Q --> R
+    H --> R
+    J --> T --> U
